@@ -33,3 +33,30 @@ trickyShuffle = function (array) {
         return ([].concat(array)).sort();
     }
 };
+
+
+// Example: This should return true
+var isUnderscoreShuffleFair = isShuffleFair(_.shuffle);
+if (!isUnderscoreShuffleFair) {
+    console.error("Underscorejs's shuffle function is definitely fair.");
+}
+
+
+// Example: This should return false
+clearlyUnfairShuffle = function (array) {
+    return array;
+};
+
+var isClearlyUnfairShuffleFair = isShuffleFair(clearlyUnfairShuffle);
+if (isClearlyUnfairShuffleFair) {
+    console.error("A shuffle function that returns the array you gave it is definitely unfair.");
+}
+// This should also return false
+anotherClearlyUnfairShuffle = function(array) {
+    return ([].concat(array)).sort(function(a, b) {return a-b;});
+};
+
+var isAnotherClearlyUnfairShuffleFair = isShuffleFair(anotherClearlyUnfairShuffle);
+if (isAnotherClearlyUnfairShuffleFair) {
+    console.error("A shuffle function that sorts the array is definitely unfair");
+}

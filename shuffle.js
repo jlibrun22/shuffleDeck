@@ -37,7 +37,8 @@ var shuffle = function(array) {
  */
 var isShuffleFair = function (shuffleFunction) {
     // Do something with the shuffle function
-    var shuffledDeck = shuffleFunction([0, 1, 2, 3, 4, 5, 6, 7]);
+    var preshuffled = [0, 1, 2, 3, 4, 5, 6, 7];
+    var shuffledDeck = shuffleFunction(preshuffled);
     // Compute whether or not the shuffle is fair. This may require calling shuffleFunction multiple times.
     // Different games and differring players nd deal style will determine if the shuffle is causing someone to cheat
 
@@ -45,8 +46,11 @@ var isShuffleFair = function (shuffleFunction) {
 
     var sequential = isSequential(2, shuffledDeck);
     var threeOfAKind = isThreeOfAKind(2, shuffledDeck);
+    var same =  (preshuffled == shuffledDeck)? true : false;
+    var sorted = isSorted(shuffledDeck);
 
- 	var isFair = (!sequential && !threeOfAKind)? true : false;
+
+ 	var isFair = (!sequential && !threeOfAKind && !same && !sorted)? true : false;
     return isFair;
 };
 
@@ -97,4 +101,14 @@ if (playerCount == null) {
 
     }
     return false
+}
+
+var isSorted = function (deck) {
+    var len = deck.length - 1;
+    for(var i = 0; i < len; ++i) {
+        if(deck[i] > deck[i+1]) {
+            return false;
+        }
+    }
+    return true;
 }
