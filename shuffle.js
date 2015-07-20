@@ -11,11 +11,11 @@ var shuffle = function(array) {
     var shuffledArray = [];
 
     // this is really inefficient because it may repeat numbers and disregaurd them until it has a full deck, an ideal approach would be to create 52 numbers only
-    while (newVals<array.length){
+    while (newVals.length<array.length){
 
-    	var newIndex = Math.floor(Math.random() * array.length-1);
+    	var newIndex = (Math.floor(Math.random() * array.length-1)) + 1;
 
-    	if(newVals.indexOf(newIndex)){
+    	if(newVals.indexOf(newIndex) == -1){
 
     		newVals.push(newIndex);
     	} 
@@ -23,7 +23,7 @@ var shuffle = function(array) {
 
 	for(i =0; i<array.length; i++){
 
-	shuffleArray[newVals[i]] = array[i];
+	shuffledArray[newVals[i]] = array[i];
 	}
     return shuffledArray;
 };
@@ -43,8 +43,8 @@ var isShuffleFair = function (shuffleFunction) {
 
     //Patterns I am going to check for a sequential patterns and if there are 3 of a kind
 
-    var sequential = isSequential(2, shuffleDeck);
-    var threeOfAKind = isThreeOfAKind(2, shuffleDeck);
+    var sequential = isSequential(2, shuffledDeck);
+    var threeOfAKind = isThreeOfAKind(2, shuffledDeck);
 
  	var isFair = (!sequential && !threeOfAKind)? true : false;
     return isFair;
